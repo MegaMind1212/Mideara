@@ -1,0 +1,23 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$name = $_POST["name"];
+$email = $_POST["email"];
+$message = $_POST["message"];
+
+// Use a library like PHPMailer to send the email
+require 'phpmailer/PHPMailerAutoload.php';
+
+$mail = new PHPMailer;
+
+$mail->setFrom($email, $name);
+$mail->addAddress('your-email@example.com'); // Your email address
+$mail->Subject = 'Contact Form Submission';
+$mail->Body = "Name: $name\nEmail: $email\nMessage:\n$message";
+
+if ($mail->send()) {
+echo 'Message has been sent';
+} else {
+echo 'Message could not be sent.';
+}
+}
+?>
